@@ -1,0 +1,101 @@
+.movie_list-item {
+  display: flex;
+  width: 500px;
+  height: 279px;
+  box-shadow: 0px 4px 12px 0px #00000026;
+}
+
+.movie_picture img {
+  display: block;
+  width: 183px;
+  height: 281px;
+}
+
+.movie_info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.movie_header {
+  display: flex;
+}
+
+.movie_info-title {
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 7px;
+}
+
+.movie_rating {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  margin-left: auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.movie_rating--red {
+  border: 2px solid #e90000;
+}
+
+.movie_rating--orange {
+  border: 2px solid #e97e00;
+}
+
+.movie_rating--yellow {
+  border: 2px solid #e9d100;
+}
+
+.movie_rating--green {
+  border: 2px solid #66e900;
+}
+
+.movie_info-year {
+  display: flex;
+  height: 22px;
+  font-size: 12px;
+  color: #827e7e;
+  margin-bottom: 7px;
+  align-items: center;
+}
+
+.movie_info-categories {
+  display: flex;
+  min-height: 22px;
+  margin-bottom: 7px;
+  gap: 8px;
+}
+
+.movie_info-categories-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  background-color: #fafafa;
+  color: #000000a6;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+
+.monvie_info-text {
+  height: 129px;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.movie_rated {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  margin-top: auto;
+}
