@@ -4,3 +4,9 @@
   flex-wrap: wrap;
   margin-bottom: 14px;
 }
+
+@media all and (max-width: 768px) {
+  .movie_list {
+    justify-content: center;
+  }
+}

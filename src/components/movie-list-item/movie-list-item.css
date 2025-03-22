@@ -1,3 +1,8 @@
+.movie_list-item--desktop {
+  display: flex;
+  width: auto;
+}
+
 .movie_list-item {
   display: flex;
   width: 500px;
@@ -14,11 +19,14 @@
 .movie_info {
   display: flex;
   flex-direction: column;
+  height: auto;
   padding: 10px 20px;
 }
 
 .movie_header {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .movie_info-title {
@@ -66,9 +74,10 @@
 
 .movie_info-categories {
   display: flex;
-  min-height: 22px;
+  height: auto;
   margin-bottom: 7px;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .movie_info-categories-item {
@@ -76,7 +85,7 @@
   align-items: center;
   justify-content: center;
   min-width: 46px;
-  min-height: 20px;
+  min-height: 15px;
   padding-top: 2px;
   padding-left: 2px;
   padding-right: 2px;
@@ -98,4 +107,116 @@
   align-items: center;
   height: 46px;
   margin-top: auto;
+}
+
+.movie_info--mobile {
+  display: none;
+}
+
+@media all and (max-width: 768px) {
+  .movie_list-item {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .movie_picture {
+    float: left;
+    height: auto;
+  }
+
+  .movie_picture img {
+    width: 100px;
+    height: auto;
+  }
+
+  .movie_info {
+    padding: 10px;
+    flex-grow: 1;
+  }
+
+  .movie_header {
+    align-items: flex-start;
+  }
+
+  .movie_info-title {
+    font-size: 14px;
+  }
+
+  .movie_info--mobile {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  .movie_rating {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    margin-left: 0px;
+  }
+
+  .monvie_info-text {
+    height: auto;
+  }
+
+  .monvie_info-text {
+    display: none;
+  }
+  .movie_rated {
+    display: none;
+  }
+
+  .movie_info--mobile {
+    padding: 10px;
+    height: auto;
+  }
+
+  .movie_rated--mobile {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .movie_list-item {
+    flex-direction: column;
+  }
+  .movie_picture {
+    float: left;
+    height: auto;
+  }
+  .movie_info-title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 7px;
+  }
+
+  .movie_picture img {
+    width: 60px;
+    height: auto;
+  }
+
+  .movie_info-categories-item {
+    font-size: 12px;
+  }
+  .monvie_info-text--mobile {
+    height: 129px;
+    font-size: 12px;
+    line-height: 22px;
+  }
+  .movie_rated--mobile {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    margin-top: auto;
+  }
+
+  .monvie_info-text {
+    display: none;
+  }
+  .movie_rated {
+    display: none;
+  }
 }

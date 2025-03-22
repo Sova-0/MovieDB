@@ -5,6 +5,7 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 import Spinner from '../spinner/spinner';
 import NoResult from '../no-result/noResult';
 import MovieList from '../movie-list/movie-list';
+import PagePaginationRated from '../paginationRated/paginationRated';
 
 function RatedActiveTab({
   loading,
@@ -15,6 +16,9 @@ function RatedActiveTab({
   guestVote,
   actionTab,
   ratedMovieData,
+  currentPageRated,
+  totalPageRated,
+  onPageChangeRated,
 }) {
   const hasData = !(loading || error);
   const errorShow = error ? (
@@ -30,6 +34,13 @@ function RatedActiveTab({
       guestVote={guestVote}
     />
   ) : null;
+  const pagination = hasData ? (
+    <PagePaginationRated
+      currentPageRated={currentPageRated}
+      totalPageRated={totalPageRated}
+      onPageChangeRated={onPageChangeRated}
+    />
+  ) : null;
   const noRes = noResult ? <NoResult searchQuery={searchQuery} /> : null;
   const noRatedMovie =
     ratedMovieData.length === 0 ? (
@@ -41,6 +52,7 @@ function RatedActiveTab({
       {errorShow}
       {spinner}
       {content}
+      {pagination}
       {noRes}
     </div>
   );
@@ -54,6 +66,9 @@ RatedActiveTab.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   noResult: PropTypes.bool.isRequired,
   guestVote: PropTypes.objectOf(PropTypes.number).isRequired,
+  currentPageRated: PropTypes.number.isRequired,
+  totalPageRated: PropTypes.number.isRequired,
+  onPageChangeRated: PropTypes.func.isRequired,
   ratedMovieData: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

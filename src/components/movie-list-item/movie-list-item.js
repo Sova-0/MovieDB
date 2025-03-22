@@ -55,39 +55,58 @@ export default class MovieListItem extends Component {
     const truncatedOverview = truncateText(overview);
     return (
       <li className="movie_list-item">
-        <div className="movie_picture">
-          <img
-            src={
-              posterPath
-                ? `https://image.tmdb.org/t/p/w500${posterPath}`
-                : '/no-img.jpg'
-            }
-            alt="Film"
-          />
-        </div>
-        <div className="movie_info">
-          <div className="movie_header">
-            <h5 className="movie_info-title">{originalTitle}</h5>
-            <div className={`movie_rating ${this.generateClass()}`}>
-              {voteAverage.toFixed(1)}
+        <div className="movie_list-item--desktop">
+          <div className="movie_picture">
+            <img
+              src={
+                posterPath
+                  ? `https://image.tmdb.org/t/p/w500${posterPath}`
+                  : '/no-img.jpg'
+              }
+              alt="Film"
+            />
+          </div>
+          <div className="movie_info">
+            <div className="movie_header">
+              <h5 className="movie_info-title">{originalTitle}</h5>
+              <div className={`movie_rating ${this.generateClass()}`}>
+                {voteAverage.toFixed(1)}
+              </div>
+            </div>
+            <span className="movie_info-year">{releaseDate}</span>
+            <div className="movie_info-categories">
+              {movieGenres.length > 0 ? (
+                movieGenres.map((genre) => {
+                  return (
+                    <span key={genre} className="movie_info-categories-item">
+                      {genre}
+                    </span>
+                  );
+                })
+              ) : (
+                <span className="movie_info-categories-item">Unknown</span>
+              )}
+            </div>
+            <span className="monvie_info-text">{truncatedOverview}</span>
+            <div className="movie_rated">
+              {actionTab === 'search' ? (
+                <Rate
+                  allowHalf
+                  count={10}
+                  onChange={(value) => {
+                    updateGuestVote(movieId, value);
+                  }}
+                  value={rating || 0}
+                />
+              ) : (
+                <Rate allowHalf count={10} value={rating} />
+              )}
             </div>
           </div>
-          <span className="movie_info-year">{releaseDate}</span>
-          <div className="movie_info-categories">
-            {movieGenres.length > 0 ? (
-              movieGenres.map((genre) => {
-                return (
-                  <span key={genre} className="movie_info-categories-item">
-                    {genre}
-                  </span>
-                );
-              })
-            ) : (
-              <span className="movie_info-categories-item">Unknown</span>
-            )}
-          </div>
-          <span className="monvie_info-text">{truncatedOverview}</span>
-          <div className="movie_rated">
+        </div>
+        <div className="movie_info--mobile">
+          <span className="monvie_info-text--mobile">{truncatedOverview}</span>
+          <div className="movie_rated--mobile">
             {actionTab === 'search' ? (
               <Rate
                 allowHalf

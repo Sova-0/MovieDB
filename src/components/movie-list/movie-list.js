@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import MovieListItem from '../movie-list-item/movie-list-item';
 import './movie-list.css';
@@ -10,13 +11,17 @@ function MovieList({ movieData, actionTab, guestVote, updateGuestVote }) {
     <div className="movie_wrapper">
       <ul className="movie_list">
         {movieData?.map((movie) => {
+          const formatReleaseDate = movie.release_date
+            ? format(new Date(movie.release_date), 'MMMM d, yyyy')
+            : 'Date not avalible';
+
           return (
             <MovieListItem
               key={movie.id}
               movieId={movie.id}
               originalTitle={movie.original_title}
               overview={movie.overview}
-              releaseDate={movie.release_date}
+              releaseDate={formatReleaseDate}
               voteAverage={movie.vote_average}
               posterPath={movie.poster_path}
               actionTab={actionTab}

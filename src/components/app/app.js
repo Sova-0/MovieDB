@@ -41,7 +41,9 @@ export default class App extends Component {
       searchQuery: '',
       noResult: false,
       currentPage: 1,
+      currentPageRated: 1,
       totalPage: null,
+      totalPageRated: null,
       guestSessionId: null,
       actionTab: 'search',
       guestVote: {},
@@ -51,12 +53,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('guestSessionId')) {
-      this.setState({
-        guestSessionId: localStorage.getItem('guestSessionId'),
-      });
-      return;
-    }
     this.movieService
       .getGenres()
       .then((genres) => {
@@ -66,9 +62,20 @@ export default class App extends Component {
         console.error('Ошибка загрузки жанров', error);
       });
 
+    const storedSessionId = localStorage.getItem('guestSessionId');
+    if (storedSessionId) {
+      console.log('guestSessionId from localStorage:', storedSessionId);
+      this.setState({
+        guestSessionId: storedSessionId,
+      });
+      return;
+    }
+
     this.movieService
       .guestSession()
-      .then((sessionId) => {
+      .then(() => {
+        const sessionId = localStorage.getItem('guestSessionId');
+        console.log('guestSessionId created:', sessionId);
         this.setState({ guestSessionId: sessionId });
       })
       .catch((error) => {
@@ -90,6 +97,12 @@ export default class App extends Component {
   onPageChange = (page) => {
     this.setState({ currentPage: page }, () => {
       this.updateMovie();
+    });
+  };
+
+  onPageChangeRated = (page) => {
+    this.setState({ currentPageRated: page }, () => {
+      this.handleRatedTab();
     });
   };
 
@@ -133,12 +146,13 @@ export default class App extends Component {
     // }
     const { guestSessionId } = this.state;
     this.movieService.getRatingMovie(guestSessionId).then((data) => {
+      console.log(data);
       const movie = data.results;
       const totalPage = data.total_pages;
       this.setState({
         ratedMovieData: movie,
         loading: false,
-        totalPage,
+        totalPageRated: totalPage,
       });
     });
   };
@@ -157,6 +171,8 @@ export default class App extends Component {
       actionTab,
       ratedMovieData,
       genres,
+      currentPageRated,
+      totalPageRated,
     } = this.state;
     const { TabPane } = Tabs;
 
@@ -186,9 +202,9 @@ export default class App extends Component {
               <RatedActiveTab
                 errorMessage={errorMessage}
                 loading={loading}
-                currentPage={currentPage}
-                totalPage={totalPage}
-                onPageChange={this.onPageChange}
+                currentPageRated={currentPageRated}
+                totalPageRated={totalPageRated}
+                onPageChangeRated={this.onPageChangeRated}
                 error={error}
                 guestVote={guestVote}
                 actionTab={actionTab}
